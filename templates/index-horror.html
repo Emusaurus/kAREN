@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body bgcolor="171717">
+    <h1 style="color:white">dIE</h1>
+    <h3 style="color:white">A web implementation of <a href="https://github.com/gunthercox/ChatterBot">pLease kill me</a>.</h3>
+	<style>
+    .shadowfilter {
+    -webkit-filter: drop-shadow(12px 12px 7px rgb(255, 0, 0));
+     filter: drop-shadow(12px 12px 7px rgb(255, 0, 0));
+}
+
+.bottleimage {
+    width: 500px;
+}
+</style>
+	<image align="right" class="shadowfilter bottleimage" src="/static/images/karen.png" height="420" width="420"></image>
+    <div>
+      <div id="chatbox">
+        <p class="botText"><span>Why would you let me die, Jayden?</span></p>
+      </div>
+      <div id="userInput">
+        <input style="background:rgb(17, 17, 17); color:white" id="textInput" type="text" name="msg" placeholder="Message">
+        <input id="buttonInput" type="submit" value="Send">
+      </div>
+
+<!-- might be used later for themes
+      <div align="right">
+      <button type="button" onclick="myFunction()">Set background color</button>
+      </div>
+      <script>
+      function myFunction() {
+        document.body.style.backgroundColor = "red";
+      }
+      </script>
+-->
+
+      <script>
+        function getBotResponse() {
+          var rawText = $("#textInput").val();
+
+		  while(rawText.includes(">")){
+		  rawText = rawText.replace('>',' ');
+		  }
+
+		  while(rawText.includes("<")){
+		  rawText = rawText.replace('<',' ');
+		  }
+
+      while(rawText.includes("{")){
+      rawText = rawText.replace('{',' ');
+      }
+
+      while(rawText.includes("}")){
+      rawText = rawText.replace('}',' ');
+      }
+
+		  //this entire user input sanitization method might come back to bite me in the ass later so please don't exploit it.
+
+          var userHtml = '<p class="userText"><span>' + rawText + '</span></p>';
+          $("#textInput").val("");
+          $("#chatbox").append(userHtml);
+          document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+
+          $.get("/get", { msg: rawText }).done(function(data) {
+
+          if(rawText.length > 100){
+            alert("you don't have to yell, I already hate my life enough.")
+            rawText = "*cries*"
+          }
+
+          var knock = new Audio('/static/sounds/knock.mp3');
+
+          if (data.includes("user.agentstring")){
+            var botHtml = '<p class="botText"><span>' + navigator.userAgent + '</span></p>';
+          } else if (data.includes("image.dead")) { //if response contains "image.dead"
+              var botHtml = '<image src="/static/images/dead.png" height="247" width="329"></image>';
+          } else if (rawText.includes("send nudes")) { //if input contains "send nudes"
+              var botHtml = '<image src="/static/images/dead.png" height="247" width="329"></image>'; //give "nudes"
+          } else if (data.includes("image.basement")) { //if response contains "image.basement"
+              var botHtml = '<image src="/static/images/basement.png" height="247" width="329"></image>';
+          } else if (data.includes("sound.knock")) { //if response contains "sound.knock"
+              knock.play();
+              var botHtml = '<p class="botText"><span>' + "I am outside." + '</span></p>';
+          } else var botHtml = '<p class="botText"><span>' + data + '</span></p>'; //if not, be normal
+
+            $("#chatbox").append(botHtml); //bothtml is displayed
+            document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+          });
+        }
+        $("#textInput").keypress(function(e) {
+            if(e.which == 13) {
+                getBotResponse();
+            }
+        });
+        $("#buttonInput").click(function() {
+          getBotResponse();
+        })
+      </script>
+    </div>
+  </body>
+</html>
