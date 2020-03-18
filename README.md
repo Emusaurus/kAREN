@@ -6,7 +6,7 @@
 
 ## Local Setup:
  1. Ensure that Python, Flask, SQLAlchemy, and ChatterBot are installed (either manually, or run `pip3 install -r requirements.txt`).
- 2. Run *app.py* with `sudo python3 app.py`. (Need root for running in port 80)
+ 2. Run *app.py* with `sudo python3 app.py` (Need root for running in port 80).
  3. The demo will be live at [http://localhost/](http://localhost/)
 
 ## Training file:
