@@ -79,3 +79,18 @@ h3 {
     right:0;
     width: 300px;
 }
+
+.shadowfilter {
+	-webkit-filter: drop-shadow(12px 12px 7px rgb(0, 255, 0));
+	filter: drop-shadow(12px 12px 7px rgb(0, 255, 0));
+}
+
+.bottleimage {
+	width: 500px;
+}
+
+.report {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+}
