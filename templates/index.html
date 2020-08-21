@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <audio id="audio2">
+     <source src="null" type="audio/mpeg">
+    </audio>
     <link rel="stylesheet" type="text/css" href="/static/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   </head>
@@ -37,10 +40,12 @@
       }
       </script>
 -->
-      <script>
+      <script> // I. FUCKING. LOVE. JAVASCRIPT.
         function getBotResponse() {
           var rawText = $("#textInput").val();
 
+         //this entire user input sanitization method might come back to bite me in the ass later so please don't exploit it. JS CONSOLE *cough cough*
+           
 		  while(rawText.includes(">")){
 		  rawText = rawText.replace('>',' ');
 		  }
@@ -57,23 +62,31 @@
       rawText = rawText.replace('}',' ');
       }
 
-		  //this entire user input sanitization method might come back to bite me in the ass later so please don't exploit it.
+          while(rawText.length > 175){
+            alert("input is too long uwu") // <-- you can figure this out on your own.
+            rawText = "hi"
+          }
+		  
 
           var userHtml = '<p class="userText"><span>' + rawText + '</span></p>';
           $("#textInput").val("");
           $("#chatbox").append(userHtml);
           document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
-
+           
           $.get("/get", { msg: rawText }).done(function(data) {
-
-          if(rawText.length > 100){
-            alert("input is too long uwu")
-            rawText = "hi"
-          }
-
+		  
+            matches2 = ['do you fart', 'do you fart?','do robots fart?', 'do robots fart'] //I'm a fucking preschooler.
+              
             if (rawText.includes("send nudes")) { //if input contains "send nudes"
                     var botHtml = '<image src="/static/images/back2.jpg" height="247" width="329"></image>'; //send "nudes"
-                } else var botHtml = '<p class="botText"><span>' + data + '</span></p>'; //if not, be normal
+                
+                } else if(matches2.some(rawText.includes.bind(rawText))){ //Again, I'm a fucking preschooler.
+                    document.getElementById("audio2").src = "/static/sounds/sound2.ogg";
+                    var sound2 = document.getElementById("audio2");                         // <-- I worked on this for an hour.
+                    sound2.play();
+                    var botHtml = '<p class="botText"><span>' + 'Yes.' + '</span></p>';
+                    
+                }else var botHtml = '<p class="botText"><span>' + data + '</span></p>'; //if not, be "normal"
 
             $("#chatbox").append(botHtml);
             document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
