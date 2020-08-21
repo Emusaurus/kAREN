@@ -19,6 +19,13 @@
 .bottleimage {
     width: 500px;
 }
+
+.report {
+    position:absolute;
+    bottom:10px;
+    right:10px;
+}
+
 </style>
 	<image align="right" class="shadowfilter bottleimage" src="/static/images/karen.png" height="420" width="420"></image>
     <div>
@@ -29,6 +36,12 @@
         <input style="background:rgb(17, 17, 17); color:white" id="textInput" type="text" name="msg" placeholder="Message">
         <input id="buttonInput" type="submit" value="Send">
       </div>
+	  <div class="report">
+	  <a href="#" onclick="reportRogueKaren()" style="color:white">Report rogue karen       </a>
+    </div>
+
+    <script src="/static/js/rogue.js"></script>
+
 
 <!-- might be used later for themes
       <div align="right">
@@ -40,67 +53,7 @@
       }
       </script>
 -->
-      <script> // I. FUCKING. LOVE. JAVASCRIPT.
-        function getBotResponse() {
-          var rawText = $("#textInput").val();
-
-         //this entire user input sanitization method might come back to bite me in the ass later so please don't exploit it. JS CONSOLE *cough cough*
-           
-		  while(rawText.includes(">")){
-		  rawText = rawText.replace('>',' ');
-		  }
-
-		  while(rawText.includes("<")){
-		  rawText = rawText.replace('<',' ');
-		  }
-
-      while(rawText.includes("{")){
-      rawText = rawText.replace('{',' ');
-      }
-
-      while(rawText.includes("}")){
-      rawText = rawText.replace('}',' ');
-      }
-
-          while(rawText.length > 175){
-            alert("input is too long uwu") // <-- you can figure this out on your own.
-            rawText = "hi"
-          }
-		  
-
-          var userHtml = '<p class="userText"><span>' + rawText + '</span></p>';
-          $("#textInput").val("");
-          $("#chatbox").append(userHtml);
-          document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
-           
-          $.get("/get", { msg: rawText }).done(function(data) {
-		  
-            matches2 = ['do you fart', 'do you fart?','do robots fart?', 'do robots fart'] //I'm a fucking preschooler.
-              
-            if (rawText.includes("send nudes")) { //if input contains "send nudes"
-                    var botHtml = '<image src="/static/images/back2.jpg" height="247" width="329"></image>'; //send "nudes"
-                
-                } else if(matches2.some(rawText.includes.bind(rawText))){ //Again, I'm a fucking preschooler.
-                    document.getElementById("audio2").src = "/static/sounds/sound2.ogg";
-                    var sound2 = document.getElementById("audio2");                         // <-- I worked on this for an hour.
-                    sound2.play();
-                    var botHtml = '<p class="botText"><span>' + 'Yes.' + '</span></p>';
-                    
-                }else var botHtml = '<p class="botText"><span>' + data + '</span></p>'; //if not, be "normal"
-
-            $("#chatbox").append(botHtml);
-            document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
-          });
-        }
-        $("#textInput").keypress(function(e) {
-            if(e.which == 13) {
-                getBotResponse();
-            }
-        });
-        $("#buttonInput").click(function() {
-          getBotResponse();
-        })
-      </script>
+      <script src="/static/js/ooga.js"></script> <!-- I. FUCKING. LOVE. JAVASCRIPT. -->
     </div>
   </body>
 </html>
