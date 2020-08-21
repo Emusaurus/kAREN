@@ -13,8 +13,7 @@ trainer = ChatterBotCorpusTrainer(english_bot)
 
 @app.before_request
 def before_request():
-    # When you import jinja2 macros, they get cached which is annoying for local
-    # development, so wipe the cache every request.
+    # When you import jinja2 macros, they get cached which is FUCKING annoying for local development, so wipe the cache every request.
     if 'localhost' in request.host_url or '0.0.0.0' in request.host_url:
         app.jinja_env.cache = {}
 
