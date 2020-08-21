@@ -8,7 +8,7 @@ function reportRogueKaren() {
 
         $.ajax({
             type: "POST",
-            url: https: //maker.ifttt.com/trigger/karen_rogue_reported/with/key/cpUmNJz0j4Hn-qeRou7DlI,
+            url: https://maker.ifttt.com/trigger/karen_rogue_reported/with/key/cpUmNJz0j4Hn-qeRou7DlI,
             data: data,
             success: reportSuccess(),
             dataType: text
