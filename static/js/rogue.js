@@ -17,3 +17,4 @@ function reportRogueKaren() {
     } else window.alert("You've already reported rogue karen.")
 }
 
+//end
