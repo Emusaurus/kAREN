@@ -38,7 +38,7 @@ function getBotResponse() {
         msg: rawText
     }).done(function(data) {
 
-        matches2 = [''] //I'm a ------- preschooler.
+        matches2 = ['bruh'] //I'm a ------- preschooler.
 
         if (rawText.includes("send nudes")) { //if input contains "send nudes"
             var botHtml = '<image src="/static/images/back2.jpg" height="247" width="329"></image>'; //send "nudes"
