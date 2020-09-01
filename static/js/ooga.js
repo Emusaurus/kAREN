@@ -1,7 +1,7 @@
 function getBotResponse() {
     var rawText = $("#textInput").val();
 
-    //this entire user input sanitization method might come back to bite me in the ass later so please don't exploit it. JS CONSOLE *cough cough*
+    //this entire user input sanitization method might come back to bite me in the --- later so please don't exploit it. JS CONSOLE *cough cough*
 
     while (rawText.includes(">")) {
         rawText = rawText.replace('>', ' ');
@@ -37,12 +37,12 @@ function getBotResponse() {
         msg: rawText
     }).done(function(data) {
 
-        matches2 = ['do you fart', 'do you fart?', 'do robots fart?', 'do robots fart'] //I'm a fucking preschooler.
+        matches2 = [''] //I'm a ------- preschooler.
 
         if (rawText.includes("send nudes")) { //if input contains "send nudes"
             var botHtml = '<image src="/static/images/back2.jpg" height="247" width="329"></image>'; //send "nudes"
 
-        } else if (matches2.some(rawText.includes.bind(rawText))) { //Again, I'm a fucking preschooler.
+        } else if (matches2.some(rawText.includes.bind(rawText))) { //Again, I'm a ------- preschooler.
             document.getElementById("audio2").src = "/static/sounds/sound2.ogg";
             var sound2 = document.getElementById("audio2"); // <-- I worked on this for an hour.
             sound2.play();
